@@ -3,6 +3,7 @@ import ChatRoom from "@/components/ChatRoom/ChatRoom"
 import Footer from "@/components/Footer/Footer"
 import Navbar from "@/components/Navbar"
 import StepAccess from "@/components/StepAccess/StepAccess";
+import StepAdvice from "@/components/StepAdvice/StepAdvice";
 import StepJobApply from "@/components/StepJobApply/StepJobApply";
 import StepMode from "@/components/StepMode/StepMode";
 import StepPseudo from "@/components/StepPseudo/StepPseudo";
@@ -22,6 +23,7 @@ export default function ChatAccess() {
 <StepMode/>
 <Elements stripe={stripePromise}>
 <StripeContainer/>
+<StepAdvice/>
   </Elements>
 
     <Footer/>
