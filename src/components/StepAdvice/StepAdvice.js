@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
 
-export default function StepAdvice() {
+export default function StepAdvice(props) {
   return (
-<div className="hero">
-  <div className="hero-overlay bg-opacity-60"></div>
-  <div className="hero-content text-center text-neutral-content">
-    <div className="max-w-md">
+<div className="hero justify-center my-5">
+  <div className="hero-overlay bg-opacity-60 "></div>
+  <div className="hero-content text-center text-neutral-content ">
+    <div className="max-w-md ">
       <h1 className="mb-5 text-5xl font-bold">Astuce</h1>
       <p>
             Pour permettre une interaction optimale avec le simulateur, nous
@@ -17,6 +17,10 @@ export default function StepAdvice() {
             et naturelle en utilisant la reconnaissance vocale de votre
             téléphone pour maximiser votre préparation.
           </p>
+          <button onClick={()=>{props.setUnderstood(true)}} className="btn btn-primary m-2">
+            Compris!
+            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48" fill="white"><path d="m561-242-43-42 168-168H160v-60h526L517-681l43-42 241 241-240 240Z"/></svg>
+            </button>
           <div className="flex flex-col lg:flex-row w-full items-center justify-center">
             <Image
               src="/keyboard.png"

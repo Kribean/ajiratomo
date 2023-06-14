@@ -1,6 +1,12 @@
 "use client";
 
-export default function StepJobApply() {
+export default function StepJobApply(props) {
+  const validProcess = () => {
+    props.setStep(2);
+  };
+  const backProcess = () => {
+    props.setStep(0);
+  };
   return (
     <div className="container mx-auto">
       <div className="hero min-h-screen bg-base-200">
@@ -103,13 +109,25 @@ export default function StepJobApply() {
                   <span className="label-text">Fiche de poste</span>
                 </label>
                 <textarea
+                value={props.jobApply}
                   placeholder="Entrer votre fiche de poste"
                   className="textarea textarea-bordered textarea-lg w-full max-w-xs"
+                  onChange={(e)=>{props.setJobApply(e.target.value)}}
                 ></textarea>
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Valider</button>
+                <div className="flex flex-row justify-end">
+                <button className="btn m-5" onClick={() => {backProcess()}}>Retour</button>
+                 
+                {props.jobApply?.length>10 && <button
+                      className="btn btn-success m-5"
+                      onClick={() => validProcess()}
+                    >
+                      Valider
+                    </button>}
+                  
+                </div>
               </div>
             </div>
           </div>

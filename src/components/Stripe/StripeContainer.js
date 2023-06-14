@@ -6,11 +6,12 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
-import Image from 'next/image';
+import { useRouter } from "next/navigation";
 
-export default function StripeContainer() {
+export default function StripeContainer(props) {
   const stripe = useStripe();
   const elements = useElements();
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,8 +38,8 @@ export default function StripeContainer() {
           id:id
         }),
       })
-      .then((data)=>console.log("success ouéééé"))
-      .catch((error)=>console.log('pfff mouais a demain'))
+      .then((data)=>{router.push('/chat/45686846')})
+      .catch((error)=>props.setAlertBool(true))
     }
   };
 
@@ -50,12 +51,13 @@ export default function StripeContainer() {
     <h2 className="card-title">Paiement</h2>
     <p className='m-4'> Offre permettant une session longue (maximum 10 questions avec Ajiratomo ou/et maximum 10 minutes de conversation)</p>
     <form  onSubmit={handleSubmit}>
+    {props.alertBool&&<p className='text-error my-5'>Désolé, une erreur s'est produite lors de votre tentative d'achat. Veuillez nous contacter à caraibe.simulation@gmail.com pour résoudre ce problème.</p>}
       <CardElement
       options={{hidePostalCode:true}}/>
 
       <div className="card-actions justify-end">
-      <button className="btn btn-primary" type="submit" disabled={!stripe || !elements}>
-        Pay
+      <button className="btn btn-primary m-5" type="submit" disabled={!stripe || !elements}>
+        Payer
       </button>
     </div>
     </form>

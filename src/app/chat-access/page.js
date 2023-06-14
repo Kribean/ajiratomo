@@ -1,33 +1,37 @@
-'use client';
-import ChatRoom from "@/components/ChatRoom/ChatRoom"
-import Footer from "@/components/Footer/Footer"
-import Navbar from "@/components/Navbar"
+"use client";
+import ChatRoom from "@/components/ChatRoom/ChatRoom";
+import Footer from "@/components/Footer/Footer";
+import Navbar from "@/components/Navbar";
 import StepAccess from "@/components/StepAccess/StepAccess";
 import StepAdvice from "@/components/StepAdvice/StepAdvice";
 import StepJobApply from "@/components/StepJobApply/StepJobApply";
 import StepMode from "@/components/StepMode/StepMode";
 import StepPseudo from "@/components/StepPseudo/StepPseudo";
-import StripeContainer from "@/components/Stripe/StripeContainer";
-import {
-    Elements,
-  } from '@stripe/react-stripe-js';
-  import {loadStripe} from '@stripe/stripe-js';
-  
+import React,{ useState } from "react";
+
 export default function ChatAccess() {
-    const stripePromise = loadStripe('pk_test_51MwWxsBghvSGXPtDqsZ45uV4QGK1mJmvuD13nRMRvvxs2gHoh18z17cPz8E1ahJSZOtSdx7mGC21d7MmzIO3Sf1300qPQHam8Y');
+
+  const [step, setStep] = useState(0);
+  const [pseudo, setPseudo] = useState("");
+  const [jobApply, setJobApply] = useState("");
+
   return (
     <div className="flex flex-col h-screen justify-between">
-    <StepAccess/>
-<StepPseudo/>
-<StepJobApply/>
-<StepMode/>
-<Elements stripe={stripePromise}>
-<StripeContainer/>
-<StepAdvice/>
-  </Elements>
-
-    <Footer/>
-    
-</div>
-  )
+      <StepAccess step={step} />
+      {step === 0 && (
+        <StepPseudo setStep={setStep} pseudo={pseudo} setPseudo={setPseudo} />
+      )}
+      {step === 1 && (
+        <StepJobApply
+          setStep={setStep}
+          jobApply={jobApply}
+          setJobApply={setJobApply}
+        />
+      )}
+      {step === 2 && (
+        <StepMode setStep={setStep} pseudo={pseudo} jobApply={jobApply} />
+      )}
+      <Footer />
+    </div>
+  );
 }

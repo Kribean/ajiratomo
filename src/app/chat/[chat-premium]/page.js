@@ -1,4 +1,4 @@
-'use client';
+"use client"
 import ChatRoom from "@/components/ChatRoom/ChatRoom"
 import Footer from "@/components/Footer/Footer"
 import Navbar from "@/components/Navbar"

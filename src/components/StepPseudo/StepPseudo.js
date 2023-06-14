@@ -1,6 +1,9 @@
 "use client";
+export default function StepPseudo(props) {
+  const validProcess = () => {
+    props.setStep(1);
+  };
 
-export default function StepPseudo() {
   return (
     <div className="container mx-auto">
       <div className="hero min-h-screen bg-base-200">
@@ -24,11 +27,24 @@ export default function StepPseudo() {
                   type="text"
                   placeholder="Entrer votre pseudo"
                   className="input input-bordered"
+                  value={props.pseudo}
+                  onChange={(e) => {
+                    props.setPseudo(e.target.value);
+                  }}
                 />
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Valider</button>
+                <div className="flex flex-row justify-end">
+                  {props.pseudo?.length > 0 && (
+                    <button
+                      className="btn btn-success m-5"
+                      onClick={() => validProcess()}
+                    >
+                      Valider
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
