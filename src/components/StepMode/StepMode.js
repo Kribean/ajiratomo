@@ -43,7 +43,7 @@ const backToMode = ()=>{
               </button>
               <h1 className="text-5xl font-bold">Session premium à 2 euros</h1>
               <Elements stripe={stripePromise}>
-                <StripeContainer setAlertBool={setAlertBool} alertBool={alertBool} />
+                <StripeContainer setAlertBool={setAlertBool} alertBool={alertBool} pseudo={props.pseudo} jobApply={props.jobApply} />
               </Elements>
             </div>
           ) : (
