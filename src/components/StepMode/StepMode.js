@@ -11,7 +11,32 @@ export default function StepMode(props) {
   const [paySession, setPaySession] = useState(false);
   const [alertBool, setAlertBool] = useState(false);
   const goToFreeSession = () => {
-    router.push("/chat");
+
+    fetch(`http://localhost:8000/api/chat`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        jobApply:props.jobApply,
+        nickname:props.pseudo,
+        email: props.email,
+      }),
+    })
+      .then((data) => {
+        if (data.ok) {
+          return data.json();
+        }
+        throw new Error("Something went wrong");
+      })
+      .then((data)=>{
+        router.push(`/chat/${data.sessionId}`);            
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   };
 
 const goToPremiumSession = ()=>{
@@ -21,6 +46,10 @@ const goToPremiumSession = ()=>{
 const backToMode = ()=>{
   setPaySession(false);
 }
+
+const backToPrevious = () => {
+  props.setStep(1);
+};
 
 
   const stripePromise = loadStripe(
@@ -43,7 +72,7 @@ const backToMode = ()=>{
               </button>
               <h1 className="text-5xl font-bold">Session premium à 2 euros</h1>
               <Elements stripe={stripePromise}>
-                <StripeContainer setAlertBool={setAlertBool} alertBool={alertBool} pseudo={props.pseudo} jobApply={props.jobApply} />
+                <StripeContainer setAlertBool={setAlertBool} alertBool={alertBool} pseudo={props.pseudo} jobApply={props.jobApply} email={email} setEmail={setEmail} />
               </Elements>
             </div>
           ) : (
@@ -69,6 +98,11 @@ const backToMode = ()=>{
                   className="btn btn-outline btn-primary m-10"
                 >
                   Gratuit - 1 question
+                </button>
+              </div>
+              <div className="flex flex-row justify-end m-5">
+              <button onClick={backToPrevious} className="btn btn-neutral">
+                  Retour
                 </button>
               </div>
             </div>

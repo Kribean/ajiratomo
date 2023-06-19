@@ -1,8 +1,18 @@
 "use client";
 export default function StepPseudo(props) {
+  const lengthPseudo = 30;
   const validProcess = () => {
     props.setStep(1);
   };
+
+  const handleChangePseudo= (e) => {
+    const { value } = e.target;
+    const regex = /^[a-zA-Z0-9\s]+$/;
+
+    if (regex.test(value)||value.length==0) {
+      props.setPseudo(value);
+    }
+  }
 
   return (
     <div className="container mx-auto">
@@ -16,6 +26,7 @@ export default function StepPseudo(props) {
               Laisse-moi connaître ton pseudo et nous nous lancerons dans cette
               aventure ensemble ! 😊🎙️
             </p>
+            <p className="text-error">Les caractères spéciaux ne sont pas authorisés</p>
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body">
@@ -28,9 +39,9 @@ export default function StepPseudo(props) {
                   placeholder="Entrer votre pseudo"
                   className="input input-bordered"
                   value={props.pseudo}
-                  onChange={(e) => {
-                    props.setPseudo(e.target.value);
-                  }}
+                  onChange={handleChangePseudo}
+                  maxLength={lengthPseudo}
+                  pattern="^[a-zA-Z0-9\s]+$"
                 />
               </div>
 

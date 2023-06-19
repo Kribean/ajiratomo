@@ -4,7 +4,7 @@ import Footer from "@/components/Footer/Footer"
 import Navbar from "@/components/Navbar"
 
 
-export default function Chat() {
+export default function ChatPremium() {
   return (
     <div className="flex flex-col h-screen justify-between">
     <Navbar/>
@@ -12,7 +12,6 @@ export default function Chat() {
     
 <p>Premium</p>
 <ChatRoom/>
-<p>oook</p>
     </main>
     <Footer/>
     

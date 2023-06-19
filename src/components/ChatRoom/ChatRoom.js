@@ -7,6 +7,7 @@ import ChatTalkOption from "../ChatTalkOption/ChatTalkOption";
 import ChatInputArea from "../ChatInputArea/ChatInputArea";
 import ChatTiming from "../ChatTiming/ChatTiming";
 import ChatMessage from "../ChatMessage/ChatMessage";
+import ChatContainer from "../ChatContainer/ChatContainer";
 
 export default function ChatRoom() {
 
@@ -23,9 +24,9 @@ export default function ChatRoom() {
   {message:"Alors je vais te poser une question",isRobot:true},
   {message:"Ouaip vas y",isRobot:false}]
   return (
-    <div className="container mx-auto">
+    <div className="flex flex-col">
       <ChatTiming />
-      {tabMessage.map(element=><ChatMessage message={element.message} isRobot={element.isRobot} />)}
+      <ChatContainer tabMessage={tabMessage}/>
       <ChatInputArea />
     </div>
   );

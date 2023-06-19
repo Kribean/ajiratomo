@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 export default function StepJobApply(props) {
   const validProcess = () => {
     props.setStep(2);
@@ -7,6 +9,52 @@ export default function StepJobApply(props) {
   const backProcess = () => {
     props.setStep(0);
   };
+
+  const [goToNextPage, setGoToNextPage] = useState(0);
+  const [nbrOfWord, setNbrOfWord] = useState(0);
+
+  const handleChangeTextJob = (e) => {
+    const text = e.target.value;
+    props.setJobApply(e.target.value);
+
+    setNbrOfWord(Math.max(text.split(" ").length, text.split("\t").length));
+    if (
+      text.trim().length > 50 &&
+      Math.max(text.split(" ").length, text.split("\t").length) <= 300
+    ) {
+      setGoToNextPage(1);
+    } else if (text.trim().length <= 50) {
+      setGoToNextPage(2);
+    } else {
+      setGoToNextPage(3);
+    }
+  };
+
+  useEffect(() => {
+    if (props.jobApply) {
+      setNbrOfWord(
+        Math.max(
+          props.jobApply?.split(" ").length,
+          props.jobApply?.split("\t").length
+        )
+      );
+
+      if (
+        props.jobApply?.trim().length > 50 &&
+        Math.max(
+          props.jobApply?.split(" ").length,
+          props.jobApply?.split("\t").length
+        ) <= 300
+      ) {
+        setGoToNextPage(1);
+      } else if (props.jobApply.trim().length <= 50) {
+        setGoToNextPage(2);
+      } else {
+        setGoToNextPage(3);
+      }
+    }
+  }, []);
+
   return (
     <div className="container mx-auto">
       <div className="hero min-h-screen bg-base-200">
@@ -28,7 +76,7 @@ export default function StepJobApply(props) {
               tabIndex={0}
               className="collapse collapse-arrow border border-base-300 bg-base-200"
             >
-                <input type="checkbox" className="peer" />
+              <input type="checkbox" className="peer" />
               <div className="collapse-title text-xl font-medium">
                 Caractéristique d'une bonne fiche de poste
               </div>
@@ -102,31 +150,56 @@ export default function StepJobApply(props) {
               </div>
             </div>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+
+          <div className="card flex-shrink-0 w-full max-w-xl shadow-2xl bg-base-100">
             <div className="card-body">
               <div className="form-control">
+                <p className={nbrOfWord > 300 ? "text-error" : "text-dark"}>
+                  {" "}
+                  {nbrOfWord}/300
+                </p>
                 <label className="label">
                   <span className="label-text">Fiche de poste</span>
                 </label>
                 <textarea
-                value={props.jobApply}
+                  value={props.jobApply}
                   placeholder="Entrer votre fiche de poste"
-                  className="textarea textarea-bordered textarea-lg w-full max-w-xs"
-                  onChange={(e)=>{props.setJobApply(e.target.value)}}
+                  className="textarea textarea-bordered textarea-lg w-full max-w-xl"
+                  onChange={handleChangeTextJob}
                 ></textarea>
               </div>
 
               <div className="form-control mt-6">
                 <div className="flex flex-row justify-end">
-                <button className="btn m-5" onClick={() => {backProcess()}}>Retour</button>
-                 
-                {props.jobApply?.length>10 && <button
+                  <button
+                    className="btn m-5"
+                    onClick={() => {
+                      backProcess();
+                    }}
+                  >
+                    Retour
+                  </button>
+
+                  {goToNextPage === 1 && (
+                    <button
                       className="btn btn-success m-5"
                       onClick={() => validProcess()}
                     >
                       Valider
-                    </button>}
-                  
+                    </button>
+                  )}
+                  {goToNextPage === 2 && (
+                    <p>
+                      Il n' y a pas assez de mots, détaillez un peu plus. Type
+                      d'emploi, compétences recherchées ...
+                    </p>
+                  )}
+                  {goToNextPage === 3 && (
+                    <p className="text-error">
+                      Oops! Il y a trop de mots, pour permettre un traitement
+                      optimal, le texte ne dois pas dépasser 300 mots
+                    </p>
+                  )}
                 </div>
               </div>
             </div>

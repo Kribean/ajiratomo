@@ -10,10 +10,16 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function StripeContainer(props) {
-  const [email,setEmail] = useState(" ");
+
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
+
+  const handleChangeEmail = (e)=>{
+    const sanitizedEmail = e.target.value.replace(/[^a-zA-Z0-9@.-]/g, '');
+    if(sanitizedEmail)
+    {props.setEmail(sanitizedEmail)}
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -59,13 +65,24 @@ export default function StripeContainer(props) {
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl shadow-indigo-500/40 m-10">
       <div className="card-body ">
-        <h1 className="mb-5 text-5xl font-bold">Pass Premium</h1>
         <h2 className="card-title">Paiement</h2>
         <p className="m-4">
           {" "}
           Offre permettant une session longue (maximum 10 questions avec
           Ajiratomo ou/et maximum 10 minutes de conversation)
         </p>
+        <div className="flex flex-col justify-start">
+                <label className="label">
+                  <span className="label-text">Veuillez rentrer votre email pour réception de votre facture</span>
+                </label>
+                <input
+                  type="email"
+                  placeholder="Entrer votre email"
+                  className="input input-bordered lg:w-[500px] mb-[20px]"
+                  value={props.email}
+                  onChange={handleChangeEmail}
+                />
+              </div>
         <form onSubmit={handleSubmit}>
           {props.alertBool && (
             <p className="text-error my-5">
@@ -74,11 +91,9 @@ export default function StripeContainer(props) {
               résoudre ce problème.
             </p>
           )}
-          <input type="text" 
-          placeholder="Votre email"
-          value={email} 
-          className="input input-bordered input-primary w-full max-w-xs p-4 my-5"
-          onChange={(e)=>{setEmail(e.target.value)}} />
+          <div className="flex flex-col justify-start">
+          <h2 className="text-xl font-medium">Renseignement bancaire</h2>
+          </div>
           <CardElement options={{ hidePostalCode: true }} />
 
           <div className="card-actions justify-end">
