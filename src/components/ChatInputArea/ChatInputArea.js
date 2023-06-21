@@ -11,10 +11,10 @@ export default function ChatInputArea(props) {
     console.log(e.target.value,"ppooooo")
     setResponse(e.target.value)
   };
-  const idSession = "64916bb7cb46463957255b61";
 
   const sendResponseToBackend = ()=>{
     setShowSendButton(false);
+    const idSession = localStorage.getItem('idChatSessionAjiratomo');
     fetch(`http://localhost:8000/api/chat/${idSession}/talks`, {
       method: "POST",
       headers: {
@@ -33,11 +33,13 @@ export default function ChatInputArea(props) {
         throw new Error("Something went wrong");
       })
       .then((data)=>{
+        setResponse(""); 
         setShowSendButton(true);
         const chatQuesInter = props.chatQuestions;
         chatQuesInter.shift();
         props.setChatInterview(data.chatInterview);
-        props.setChatQuestions(chatQuesInter) //remove the first question           
+        props.setChatQuestions(chatQuesInter); //remove the first question 
+         
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +48,7 @@ export default function ChatInputArea(props) {
 
   return (
     <>
-      <div className="container px-10 flex flex-col lg:flex-row justify-between">
+      <div className="container px-10 flex flex-col lg:flex-row justify-center lg:justify-between">
         <textarea
           className="textarea textarea-bordered w-full lg:w-[80%] mb-5 p-5"
           placeholder="Ecrivez votre réponse"

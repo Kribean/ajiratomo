@@ -3,19 +3,19 @@ import ChatRoom from "@/components/ChatRoom/ChatRoom"
 import Footer from "@/components/Footer/Footer"
 import Navbar from "@/components/Navbar"
 import StepAdvice from "@/components/StepAdvice/StepAdvice";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
 
 export default function ChatFree(props) {
   const [understood,setUnderstood]=useState(false)
-const router = useRouter();
-const {idSession} = router.query;
+
 
 const [chatQuestions,setChatQuestions]=useState([]);
 const [chatInterview,setChatInterview]=useState([])
 
   useEffect(()=>{
+    
+    const idSession = localStorage.getItem('idChatSessionAjiratomo');
+    console.log(idSession,'oooooooo');
     fetch(`http://localhost:8000/api/chat/${idSession}/freemium`, {
       method: "GET",
       headers: {
@@ -42,7 +42,8 @@ const [chatInterview,setChatInterview]=useState([])
     <div className="flex flex-col h-screen justify-between">
     <Navbar/>
     <main className="container ">
-    {!understood?<StepAdvice understood={understood} setUnderstood={setUnderstood}/>
+    {!understood?
+    <StepAdvice understood={understood} setUnderstood={setUnderstood}/>
 :
 <ChatRoom 
 chatQuestions={chatQuestions} 

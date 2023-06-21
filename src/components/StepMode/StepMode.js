@@ -1,13 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import StripeContainer from "@/components/Stripe/StripeContainer";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
 export default function StepMode(props) {
-  const router = useRouter();
   const [paySession, setPaySession] = useState(false);
   const [alertBool, setAlertBool] = useState(false);
   const [showPageLoading, setShowPageLoading] = useState(false);
@@ -36,7 +34,9 @@ export default function StepMode(props) {
         throw new Error("Something went wrong");
       })
       .then((data)=>{
-        router.push(`/chat/${data.sessionId}`);            
+        console.log('kayayyyay',data.sessionId);
+        localStorage.setItem('idChatSessionAjiratomo',data.sessionId);
+        props.router.push(`/chat/${data.sessionId}`);            
       })
       .catch((error) => {
         setShowPageLoadingError(true)
@@ -46,7 +46,7 @@ export default function StepMode(props) {
   };
 
   const backToHome = ()=>{
-    router.push(`/`); 
+    props.router.push(`/`); 
   }
 
 const goToPremiumSession = ()=>{

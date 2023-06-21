@@ -13,25 +13,55 @@ export default function StepJobApply(props) {
 
   const handleChangeLevel = (level) =>{
     props.setLevelOfPractise(level);
-    handleChangeTextJob("Le titre de l'offre: "+props.jobTitle +" ." + level +" .Les responsabilités à avoir:" + props.responsabilities +" .Les compétences à avoir:  " + props.skills)
+    handleChangeTextJob("Le titre de l'offre: "
+    +(props.jobTitle.trim()==""?"non renseigné":props.jobTitle) 
+    +" ." 
+    + level 
+    +" .Les responsabilités à avoir:" 
+    + (props.responsabilities.trim()==""?"non renseigné":props.responsabilities)  
+    +" .Les compétences à avoir:  " 
+    + (props.skills.trim()==""?"non renseigné":props.skills) 
+    )
   };
 
   const handleChangeJobTitle = (e)=>{
     const text = e.target.value;
     props.setJobTitle(text);
-    handleChangeTextJob("Le titre de l'offre: "+text +" ." + props.levelOfPractise +" .Les responsabilités à avoir:" + props.responsabilities +" .Les compétences à avoir:  " + props.skills)
+    handleChangeTextJob("Le titre de l'offre: "
+    +text +" ." + 
+    (props.levelOfPractise.trim()==""?"non renseigné":props.levelOfPractise)  
+    +" .Les responsabilités à avoir:" 
+    + (props.responsabilities.trim()==""?"non renseigné":props.responsabilities)  
+    +" .Les compétences à avoir:  " 
+    + (props.skills.trim()==""?"non renseigné":props.skills) 
+    )
   };
 
   const handleChangeResponsabilities = (e)=>{
     const text = e.target.value;
     props.setResponsabilities(text);
-    handleChangeTextJob("Le titre de l'offre: "+props.jobTitle +" ." + props.levelOfPractise +" .Les responsabilités à avoir:" + text +" .Les compétences à avoir:  " + props.skills)
+    handleChangeTextJob("Le titre de l'offre: "
+    +(props.jobTitle.trim()==""?"non renseigné":props.jobTitle) 
+    +" ." 
+    + (props.levelOfPractise.trim()==""?"non renseigné":props.levelOfPractise) 
+    +" .Les responsabilités à avoir:" 
+    + text 
+    +" .Les compétences à avoir:  " 
+    + (props.skills.trim()==""?"non renseigné":props.skills)
+    )
   };
 
   const handleChangeSkills = (e)=>{
     const text = e.target.value;
     props.setSkills(text);
-    handleChangeTextJob("Le titre de l'offre: "+props.jobTitle +" ." + props.levelOfPractise +" .Les responsabilités à avoir:" + props.responsabilities +" .Les compétences à avoir:  " + text)
+    handleChangeTextJob("Le titre de l'offre: "
+    +(props.jobTitle.trim()==""?"non renseigné":props.jobTitle)  
+    +" ." 
+    + (props.levelOfPractise.trim()==""?"non renseigné":props.levelOfPractise)  
+    +" .Les responsabilités à avoir:" 
+    + (props.responsabilities.trim()==""?"non renseigné":props.responsabilities)  
+    +" .Les compétences à avoir:  " 
+    + text)
   };
 
   const [goToNextPage, setGoToNextPage] = useState(0);

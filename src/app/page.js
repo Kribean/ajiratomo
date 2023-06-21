@@ -4,6 +4,7 @@ import Footer from '../components/Footer/Footer'
 import Navbar from '../components/Navbar'
 import LandingPannel from '@/components/LandingPannel/LandingPannel'
 import Introduction from '@/components/Introduction/Introduction'
+import { useRouter } from "next/router";
 
 export default function Home() {
   return (

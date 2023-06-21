@@ -1,5 +1,4 @@
 "use client";
-import ChatRoom from "@/components/ChatRoom/ChatRoom";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar";
 import StepAccess from "@/components/StepAccess/StepAccess";
@@ -7,6 +6,7 @@ import StepJobApply from "@/components/StepJobApply/StepJobApply";
 import StepMode from "@/components/StepMode/StepMode";
 import StepPseudo from "@/components/StepPseudo/StepPseudo";
 import React,{ useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ChatAccess() {
 
@@ -18,7 +18,7 @@ export default function ChatAccess() {
   const [jobTitle,setJobTitle] = useState("");  
   const [responsabilities,setResponsabilities] = useState("");
   const [skills,setSkills] = useState(""); 
-
+  const router = useRouter();
   return (
     <div className="flex flex-col h-screen justify-between">
       <Navbar/>
@@ -49,6 +49,7 @@ export default function ChatAccess() {
         jobApply={jobApply} 
         email={email} 
         setEmail={setEmail} 
+        router={router}
  />
       )}
       <Footer />

@@ -16,11 +16,11 @@ const [goToSocial,setGoToSocial] =useState(false);
 
   return (
     <div className="flex flex-col">
-{props.setChatQuestions.length>0?      
+{props.chatQuestions.length>0?      
 <>
 <ChatTiming />
       <ChatContainer
-        theQuestion={props.chatQuestions[0].question}
+        theQuestion={props.chatQuestions[0]?.question}
         setChatQuestions={props.setChatQuestions}
         chatInterview={props.chatInterview}
         setChatInterview={props.setChatInterview}
