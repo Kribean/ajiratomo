@@ -10,8 +10,13 @@ export default function StepMode(props) {
   const router = useRouter();
   const [paySession, setPaySession] = useState(false);
   const [alertBool, setAlertBool] = useState(false);
-  const goToFreeSession = () => {
+  const [showPageLoading, setShowPageLoading] = useState(false);
+  const [showPageLoadingError, setShowPageLoadingError] = useState(false);
 
+  const goToFreeSession = () => {
+    console.log('panama')
+    setShowPageLoading(true);
+    console.log('doton no aqui')
     fetch(`http://localhost:8000/api/chat`, {
       method: "POST",
       headers: {
@@ -34,10 +39,15 @@ export default function StepMode(props) {
         router.push(`/chat/${data.sessionId}`);            
       })
       .catch((error) => {
+        setShowPageLoadingError(true)
         console.log(error);
       });
 
   };
+
+  const backToHome = ()=>{
+    router.push(`/`); 
+  }
 
 const goToPremiumSession = ()=>{
   setPaySession(true);
@@ -63,7 +73,7 @@ const backToPrevious = () => {
   <svg onClick={()=>{setAlertBool(false)}} xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
   <span>Désolé, une erreur s'est produite lors de votre tentative d'achat. Veuillez nous contacter à caraibe.simulation@gmail.com pour résoudre ce problème.</span>
 </div>
-      <div className="hero min-h-screen bg-base-200">
+{ !showPageLoading?   (  <div className="hero min-h-screen bg-base-200">
         <div className="hero-content text-center">
           {paySession ? (
             <div className="w-90">
@@ -108,7 +118,44 @@ const backToPrevious = () => {
             </div>
           )}
         </div>
+      </div>)
+    :
+    (<div className="hero min-h-screen bg-base-200 justify-center align-middle">
+    <div className="hero-content text-center">
+    {showPageLoadingError?
+        <div className="flex flex-row justify-center ">
+        <div className="chat chat-start">
+    <div className="chat-image avatar">
+      <div className="w-10 rounded-full">
+      🤖
       </div>
+    </div>
+    <div className="chat-bubble flex flex-row">
+      <p>Je suis désolé nous sommes victime de notre succès 😫, réessayez un peu plus tard. </p>
+      <button className="btn btn-active btn-secondary" onClick={()=>{backToHome()}}>Quitter</button>
+    </div>
+  </div>
+      </div>
+  :
+  (
+    <div className="flex flex-row justify-center ">
+      <div className="chat chat-start">
+  <div className="chat-image avatar">
+    <div className="w-10 rounded-full">
+    🤖
+    </div>
+  </div>
+  <div className="chat-bubble flex flex-row">
+    <p>Je suis bientôt à vous</p>
+    <span className="loading loading-dots loading-lg"></span>
+  </div>
+</div>
+    </div>
+  )  
+  }
+      </div></div>)
+      
+    }
     </div>
   );
 }

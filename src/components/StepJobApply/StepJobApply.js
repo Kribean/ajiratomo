@@ -4,26 +4,48 @@ import { useEffect, useState } from "react";
 
 export default function StepJobApply(props) {
   const validProcess = () => {
+
     props.setStep(2);
   };
   const backProcess = () => {
     props.setStep(0);
   };
 
+  const handleChangeLevel = (level) =>{
+    props.setLevelOfPractise(level);
+    handleChangeTextJob("Le titre de l'offre: "+props.jobTitle +" ." + level +" .Les responsabilités à avoir:" + props.responsabilities +" .Les compétences à avoir:  " + props.skills)
+  };
+
+  const handleChangeJobTitle = (e)=>{
+    const text = e.target.value;
+    props.setJobTitle(text);
+    handleChangeTextJob("Le titre de l'offre: "+text +" ." + props.levelOfPractise +" .Les responsabilités à avoir:" + props.responsabilities +" .Les compétences à avoir:  " + props.skills)
+  };
+
+  const handleChangeResponsabilities = (e)=>{
+    const text = e.target.value;
+    props.setResponsabilities(text);
+    handleChangeTextJob("Le titre de l'offre: "+props.jobTitle +" ." + props.levelOfPractise +" .Les responsabilités à avoir:" + text +" .Les compétences à avoir:  " + props.skills)
+  };
+
+  const handleChangeSkills = (e)=>{
+    const text = e.target.value;
+    props.setSkills(text);
+    handleChangeTextJob("Le titre de l'offre: "+props.jobTitle +" ." + props.levelOfPractise +" .Les responsabilités à avoir:" + props.responsabilities +" .Les compétences à avoir:  " + text)
+  };
+
   const [goToNextPage, setGoToNextPage] = useState(0);
   const [nbrOfWord, setNbrOfWord] = useState(0);
 
-  const handleChangeTextJob = (e) => {
-    const text = e.target.value;
-    props.setJobApply(e.target.value);
-
-    setNbrOfWord(Math.max(text.split(" ").length, text.split("\t").length));
+  const handleChangeTextJob = (element) => {
+    props.setJobApply(element);
+    setNbrOfWord(Math.max(element?.split(" ").length, element?.split("\t").length));
     if (
-      text.trim().length > 50 &&
-      Math.max(text.split(" ").length, text.split("\t").length) <= 300
+      element.trim().length > 50 &&
+      Math.max(element?.split(" ").length, element?.split("\t").length) <= 105
     ) {
       setGoToNextPage(1);
-    } else if (text.trim().length <= 50) {
+    } else if (element.trim().length <= 50) {
       setGoToNextPage(2);
     } else {
       setGoToNextPage(3);
@@ -44,7 +66,7 @@ export default function StepJobApply(props) {
         Math.max(
           props.jobApply?.split(" ").length,
           props.jobApply?.split("\t").length
-        ) <= 300
+        ) <= 105
       ) {
         setGoToNextPage(1);
       } else if (props.jobApply.trim().length <= 50) {
@@ -76,98 +98,65 @@ export default function StepJobApply(props) {
               tabIndex={0}
               className="collapse collapse-arrow border border-base-300 bg-base-200"
             >
-              <input type="checkbox" className="peer" />
-              <div className="collapse-title text-xl font-medium">
-                Caractéristique d'une bonne fiche de poste
-              </div>
-              <div className="collapse-content mx-5">
-                <ul className="list-disc">
-                  <li>
-                    Titre du poste : Un titre clair et précis qui reflète le
-                    rôle et les responsabilités du poste.
-                  </li>
-                  <li>
-                    Résumé du poste : Un bref aperçu des principales
-                    responsabilités et objectifs du poste.
-                  </li>
-                  <li>
-                    Description des tâches : Une liste détaillée des tâches et
-                    des responsabilités spécifiques liées au poste.
-                  </li>
-                  <li>
-                    Compétences requises : Une description des compétences, des
-                    connaissances et des qualifications nécessaires pour réussir
-                    dans le poste.
-                  </li>
-                  <li>
-                    Formation et expérience : Les niveaux d'éducation, de
-                    formation et d'expérience professionnelle requis ou préférés
-                    pour le poste.
-                  </li>
-                  <li>
-                    Compétences techniques : Les compétences techniques
-                    spécifiques nécessaires pour accomplir les tâches du poste
-                    (par exemple, programmation, gestion de projet, marketing
-                    numérique, etc.).
-                  </li>
-                  <li>
-                    Compétences comportementales : Les compétences
-                    interpersonnelles et comportementales souhaitées, telles que
-                    la capacité à travailler en équipe, la résolution de
-                    problèmes, la gestion du temps, etc.
-                  </li>
-                  <li>
-                    Conditions de travail : Les informations sur le lieu de
-                    travail, les horaires, les déplacements éventuels, les
-                    avantages et autres conditions spécifiques du poste.
-                  </li>
-                  <li>
-                    Objectifs et attentes : Les objectifs à atteindre dans le
-                    poste, les attentes en termes de performance et les mesures
-                    de réussite.
-                  </li>
-                  <li>
-                    Relations de travail : Les interactions et les relations
-                    avec d'autres membres de l'équipe, les superviseurs et les
-                    parties prenantes.
-                  </li>
-                  <li>
-                    Perspectives de carrière : Les opportunités de croissance,
-                    d'évolution et de développement professionnel liées au
-                    poste.
-                  </li>
-                  <li>
-                    Culture d'entreprise : Une description de la culture
-                    d'entreprise, des valeurs et de l'environnement de travail
-                    dans lequel le poste s'inscrit.
-                  </li>
-                  <li>
-                    Modalités de candidature : Les instructions et les détails
-                    sur la manière de postuler, les documents requis et les
-                    dates limites éventuelles.
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
 
           <div className="card flex-shrink-0 w-full max-w-xl shadow-2xl bg-base-100">
             <div className="card-body">
+            <progress className={(nbrOfWord<106?" progress-accent ":" progress-error ") + "progress   w-56"} value={nbrOfWord} max="200"></progress>
               <div className="form-control">
-                <p className={nbrOfWord > 300 ? "text-error" : "text-dark"}>
+                <p className={nbrOfWord > 105 ? "text-error" : "text-dark"}>
                   {" "}
-                  {nbrOfWord}/300
+                  {nbrOfWord}/105
                 </p>
-                <label className="label">
-                  <span className="label-text">Fiche de poste</span>
-                </label>
-                <textarea
-                  value={props.jobApply}
-                  placeholder="Entrer votre fiche de poste"
-                  className="textarea textarea-bordered textarea-lg w-full max-w-xl"
-                  onChange={handleChangeTextJob}
-                ></textarea>
               </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Titre du poste</span>
+                </label>
+                <input type="text" placeholder="Taper le titre du poste" className="input input-bordered input-accent w-full max-w-xs" value={props.jobTitle} onChange={handleChangeJobTitle} />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Niveau de qualification</span>
+                </label>
+                <div className="flex flex-col lg:flex-row items-center space-x-4">
+                  <div className="flex flex-row">
+  <label className="inline-flex items-center m-5">
+    <input type="radio" name="radio-7" className="radio radio-info" onChange={()=>handleChangeLevel(" le poste est pour un niveau junior ")} />
+    <span className="ml-2 text-sm font-medium text-gray-700">Junior</span>
+  </label>
+  <label className="inline-flex items-center  m-5">
+    <input type="radio" name="radio-7" className="radio radio-info" onChange={()=>handleChangeLevel(" le poste est pour un niveau intermédiaire ")} />
+    <span className="ml-2 text-sm font-medium text-gray-700">Intermédiaire</span>
+  </label>
+  </div>
+  <div className="flex flex-row">
+  <label className="inline-flex items-center  m-5">
+    <input type="radio" name="radio-7" className="radio radio-info" onChange={()=>handleChangeLevel(" le poste est pour un niveau confirmé ")} />
+    <span className="ml-2 text-sm font-medium text-gray-700">Confirmé</span>
+  </label>
+  <label className="inline-flex items-center  m-5">
+    <input type="radio" name="radio-7" className="radio radio-info" onChange={()=>handleChangeLevel(" le poste est pour un niveau expert ")} />
+    <span className="ml-2 text-sm font-medium text-gray-700">Expert</span>
+  </label>
+  </div>
+</div>
+
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Responsabilités principales</span>
+                </label>
+                <input type="text" placeholder="Taper les responsabilités" className="input input-bordered input-accent w-full max-w-xs" value={props.responsabilities} onChange={handleChangeResponsabilities} />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Compétences requises</span>
+                </label>
+                <input type="text" placeholder="Taper les compétences et outils requis" className="input input-bordered input-accent w-full max-w-xs" value={props.skills} onChange={handleChangeSkills}/>
+              </div>
+              
 
               <div className="form-control mt-6">
                 <div className="flex flex-row justify-end">
@@ -197,7 +186,7 @@ export default function StepJobApply(props) {
                   {goToNextPage === 3 && (
                     <p className="text-error">
                       Oops! Il y a trop de mots, pour permettre un traitement
-                      optimal, le texte ne dois pas dépasser 300 mots
+                      optimal, le texte ne dois pas dépasser 105 mots
                     </p>
                   )}
                 </div>

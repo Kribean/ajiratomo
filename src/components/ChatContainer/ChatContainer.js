@@ -18,11 +18,14 @@ export default function ChatContainer(props) {
         top: scrollContainer?.scrollHeight - scrollContainer?.clientHeight,
         behavior: 'smooth',
       });
-    }, [props.tabMessage]);
+    }, [props.chatInterview]);
+
+
 
   return (
     <div className="flex flex-col mx-[40px] h-[400px] overflow-y-scroll " ref={scrollContainerRef}>
-      {props.tabMessage.map((element,id)=><ChatMessage message={element.message} isRobot={element.isRobot} key={id} />)}
+      {props.chatInterview?.map((element,id)=><ChatMessage message={element.message} isRobot={element.isRobot} key={id+'bhkb'} />)}
+      <ChatMessage message={props.theQuestion} isRobot={true}  />
       <div className="chat chat-start">
           <div className="chat-image avatar">
             <div className="w-10 rounded-full">🧒🏽</div>

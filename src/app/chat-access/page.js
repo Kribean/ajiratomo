@@ -14,6 +14,10 @@ export default function ChatAccess() {
   const [pseudo, setPseudo] = useState("");
   const [jobApply, setJobApply] = useState("");
   const [email, setEmail] = useState("");
+  const [levelOfPractise,setLevelOfPractise] = useState("");
+  const [jobTitle,setJobTitle] = useState("");  
+  const [responsabilities,setResponsabilities] = useState("");
+  const [skills,setSkills] = useState(""); 
 
   return (
     <div className="flex flex-col h-screen justify-between">
@@ -29,10 +33,23 @@ export default function ChatAccess() {
           setStep={setStep}
           jobApply={jobApply}
           setJobApply={setJobApply}
+          levelOfPractise={levelOfPractise} 
+          setLevelOfPractise={setLevelOfPractise} 
+          jobTitle={jobTitle} 
+          setJobTitle={setJobTitle} 
+          responsabilities={responsabilities} 
+          setResponsabilities={setResponsabilities} 
+          skills={skills} 
+          setSkills={setSkills}
         />
       )}
       {step === 2 && (
-        <StepMode setStep={setStep} pseudo={pseudo} jobApply={jobApply} email={email} setEmail={setEmail} />
+        <StepMode setStep={setStep} 
+        pseudo={pseudo} 
+        jobApply={jobApply} 
+        email={email} 
+        setEmail={setEmail} 
+ />
       )}
       <Footer />
     </div>
