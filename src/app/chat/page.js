@@ -4,7 +4,7 @@ import Footer from "@/components/Footer/Footer"
 import Navbar from "@/components/Navbar"
 import StepAdvice from "@/components/StepAdvice/StepAdvice";
 import { useState } from "react";
-
+import { useRouter } from "next/router";
 
 export default function Chat(props) {
   const [understood,setUnderstood]=useState(false)

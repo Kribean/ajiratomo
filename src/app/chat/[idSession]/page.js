@@ -7,11 +7,11 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 
-export default function Chat(props) {
+export default function ChatFree(props) {
   const [understood,setUnderstood]=useState(false)
-//const router = useRouter();
-//const {idSession} = router.query;
-const idSession = "64916bb7cb46463957255b61";
+const router = useRouter();
+const {idSession} = router.query;
+
 const [chatQuestions,setChatQuestions]=useState([]);
 const [chatInterview,setChatInterview]=useState([])
 

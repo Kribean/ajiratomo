@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import StripeContainer from "@/components/Stripe/StripeContainer";
 import { Elements } from "@stripe/react-stripe-js";
@@ -14,9 +14,9 @@ export default function StepMode(props) {
   const [showPageLoadingError, setShowPageLoadingError] = useState(false);
 
   const goToFreeSession = () => {
-    console.log('panama')
+ 
     setShowPageLoading(true);
-    console.log('doton no aqui')
+
     fetch(`http://localhost:8000/api/chat`, {
       method: "POST",
       headers: {
@@ -50,7 +50,34 @@ export default function StepMode(props) {
   }
 
 const goToPremiumSession = ()=>{
-  setPaySession(true);
+  setShowPageLoading(true);
+
+  fetch(`http://localhost:8000/api/chat`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      jobApply:props.jobApply,
+      nickname:props.pseudo,
+      email: props.email,
+    }),
+  })
+    .then((data) => {
+      if (data.ok) {
+        return data.json();
+      }
+      throw new Error("Something went wrong");
+    })
+    .then((data)=>{
+      setPaySession(true);           
+    })
+    .catch((error) => {
+      setShowPageLoadingError(true)
+      console.log(error);
+    });
+
 };
 
 const backToMode = ()=>{
@@ -82,7 +109,7 @@ const backToPrevious = () => {
               </button>
               <h1 className="text-5xl font-bold">Session premium à 2 euros</h1>
               <Elements stripe={stripePromise}>
-                <StripeContainer setAlertBool={setAlertBool} alertBool={alertBool} pseudo={props.pseudo} jobApply={props.jobApply} email={email} setEmail={setEmail} />
+                <StripeContainer setAlertBool={setAlertBool} alertBool={alertBool} pseudo={props.pseudo} jobApply={props.jobApply} email={props.email} setEmail={props.setEmail} />
               </Elements>
             </div>
           ) : (

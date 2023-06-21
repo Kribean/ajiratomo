@@ -46,7 +46,7 @@ export default function StripeContainer(props) {
           id: id,
           jobApply:props.jobApply,
           pseudo:props.pseudo,
-          email:email
+          email:props.email
         }),
       })
         .then((data) => {

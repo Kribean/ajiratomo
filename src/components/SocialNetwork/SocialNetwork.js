@@ -15,8 +15,8 @@ import {
     LinkedinIcon,
     
   } from 'next-share'
-  
-
+  import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function SocialNetwork(props) {
 
@@ -29,7 +29,7 @@ export default function SocialNetwork(props) {
       <p className="py-6">
       Partagez-la sur vos réseaux sociaux pour offrir à vos proches la chance de se préparer professionnellement. Rejoignez notre communauté et propagez l'excellence !
       </p>
-      <div className="flex lg:flex-row flex-col justify-between m-20">
+      <div className="flex sm:flex-row flex-col justify-between m-20">
       <FacebookShareButton
   url={'https://github.com/next-share'}
   quote={'next-share is a social share buttons for your next React apps.'}
@@ -64,7 +64,10 @@ export default function SocialNetwork(props) {
   <LinkedinIcon size={32} round />
 </LinkedinShareButton>
       </div>
-      <button className="btn btn-primary">Quitter</button>
+<div className="flex lg:flex-row flex-col">
+<Link href="./" className="btn btn-neutral m-5">Quitter</Link>
+      <button className="btn btn-primary m-5" onClick={()=>{props.setGoToSocial(false)}}>Retour</button>
+</div>
     </div>
   </div>
 </div>
