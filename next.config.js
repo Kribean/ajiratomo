@@ -3,6 +3,8 @@
  */
 const nextConfig = {
     output: 'export',
+    basePath:'/ajiratomo',
+    assetPrefix:'/ajiratomo'
 
   }
    
