@@ -64,7 +64,6 @@ export default function SocialNetwork(props) {
 </LinkedinShareButton>
       </div>
 <div className="flex lg:flex-row flex-col">
-<Link href={"https://kribean.github.io/ajiratomo/"} className="btn btn-neutral m-5">Quitter</Link>
       {(!props.isPremium) && <button className="btn btn-primary m-5" onClick={()=>{props.setGoToSocial(false)}}>Retour</button>}
 </div>
     </div>
