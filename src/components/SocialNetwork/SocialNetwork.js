@@ -30,7 +30,7 @@ export default function SocialNetwork(props) {
       </p>
       <div className="flex sm:flex-row flex-col justify-between m-20">
       <FacebookShareButton
-  url={'https://github.com/next-share'}
+  url={'https://kribean.github.io/ajiratomo/'}
   quote={'Ajiratomo - Un simulateur d entretien amusant !'}
   hashtag={'#ajiratomo #entretien #simulateur'}
 >
@@ -38,33 +38,33 @@ export default function SocialNetwork(props) {
 </FacebookShareButton>
 
 <TelegramShareButton
-  url={'https://github.com/next-share'}
+  url={'https://kribean.github.io/ajiratomo/'}
   title={'Ajiratomo - Un simulateur d entretien amusant !'}
 >
   <TelegramIcon size={32} round />
 </TelegramShareButton>
 
 <TwitterShareButton
-  url={'https://github.com/next-share'}
+  url={'https://kribean.github.io/ajiratomo/'}
   title={'Ajiratomo - Un simulateur d entretien amusant !'}
 >
   <TwitterIcon size={32} round />
 </TwitterShareButton>
 
 <WhatsappShareButton
-  url={'https://github.com/next-share'}
+  url={'https://kribean.github.io/ajiratomo/'}
   title={'Ajiratomo - Un simulateur d entretien amusant !'}
   separator=":: "
 >
   <WhatsappIcon size={32} round />
 </WhatsappShareButton>
 
-<LinkedinShareButton url={'https://github.com/next-share'}>
+<LinkedinShareButton url={'https://kribean.github.io/ajiratomo/'}>
   <LinkedinIcon size={32} round />
 </LinkedinShareButton>
       </div>
 <div className="flex lg:flex-row flex-col">
-<Link href="./" className="btn btn-neutral m-5">Quitter</Link>
+<Link href="/" className="btn btn-neutral m-5">Quitter</Link>
       {(!props.isPremium) && <button className="btn btn-primary m-5" onClick={()=>{props.setGoToSocial(false)}}>Retour</button>}
 </div>
     </div>

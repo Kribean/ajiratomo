@@ -1,6 +1,5 @@
 "use client";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import StripeContainer from "@/components/Stripe/StripeContainer";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";

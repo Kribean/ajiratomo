@@ -1,8 +1,6 @@
 'use client';
 
 import "@/app/globals.css";
-import Image from "next/image";
-import rhpic from "@/../public/rhpic.png";
 import { useState } from "react";
 
 export default function ChatTalkOption() {

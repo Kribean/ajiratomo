@@ -59,7 +59,7 @@ export default function ChatRoom(props) {
                     </p>
                     <div className="flex flex-col lg:flex-row justify-center">
                       <Link
-                        href="./gotopremium"
+                        href="/gotopremium"
                         className="btn btn-success m-5"
                       >
                         Continuer en mode premium

@@ -1,6 +1,4 @@
 import '@/app/globals.css';
-import Image from 'next/image';
-import logo from '@/../public/ajiramatomo.svg'
 import "./logo.css"
 
 export default function Footer() {

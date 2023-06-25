@@ -1,7 +1,7 @@
 "use client";
 import Image from 'next/image'
-import Footer from '../components/Footer/Footer'
-import Navbar from '../components/Navbar'
+import Footer from '@/components/Footer/Footer'
+import Navbar from '@/components/Navbar'
 import LandingPannel from '@/components/LandingPannel/LandingPannel'
 import Introduction from '@/components/Introduction/Introduction'
 
