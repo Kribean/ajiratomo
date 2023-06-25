@@ -79,7 +79,7 @@ export default function ChatFree(props) {
                 Cette session est fini, retournez sur la page d'accueil et
                 lancez un nouveau entretien.
               </p>
-              <Link href={"/"} className="btn btn-primary">
+              <Link href={"https://kribean.github.io/ajiratomo/"} className="btn btn-primary">
                 Accueil
               </Link>
             </div>
