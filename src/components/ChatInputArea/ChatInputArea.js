@@ -14,7 +14,7 @@ export default function ChatInputArea(props) {
   const sendResponseToBackend = ()=>{
     setShowSendButton(false);
     const idSession = localStorage.getItem('idChatSessionAjiratomo');
-    fetch(`http://localhost:8000/api/chat/${idSession}/talks`, {
+    fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat/${idSession}/talks`, {
       method: "POST",
       headers: {
         Accept: "application/json",

@@ -17,7 +17,7 @@ export default function ChatFree(props) {
 
   useEffect(() => {
     const idSession = localStorage.getItem("idChatSessionAjiratomo");
-    fetch(`http://localhost:8000/api/chat/${idSession}/freemium`, {
+    fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat/${idSession}/freemium`, {
       method: "GET",
       headers: {
         Accept: "application/json",

@@ -30,12 +30,12 @@ export default function StripeContainer(props) {
       card: elements.getElement(CardElement),
     });
     if (!error) {
-      console.log("Token Généré", paymentMethod);
+
       const { id } = paymentMethod;
 
       const idSession = localStorage.getItem("idChatSessionAjiratomo");
 
-      fetch(`http://localhost:8000/api/chat`, {
+      fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat`, {
         method: "PUT",
         headers: {
           Accept: "application/json",
@@ -55,7 +55,7 @@ export default function StripeContainer(props) {
           throw new Error("Something went wrong");
         })
         .then((data) => {
-          router.push(`/chat/${idSession}`);
+          router.push(`/chat`);
         })
         .catch((error) => props.setAlertBool(true));
     }

@@ -15,7 +15,7 @@ export default function StepMode(props) {
  
     setShowPageLoading(true);
 
-    fetch(`http://localhost:8000/api/chat`, {
+    fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -34,9 +34,8 @@ export default function StepMode(props) {
         throw new Error("Something went wrong");
       })
       .then((data)=>{
-        console.log("fukushima",data.sessionId)
         localStorage.setItem('idChatSessionAjiratomo',data.sessionId);
-        props.router.push(`/chat/${data.sessionId}`);            
+        props.router.push(`/chat`);            
       })
       .catch((error) => {
         setShowPageLoadingError(true)
@@ -52,7 +51,7 @@ export default function StepMode(props) {
 const goToPremiumSession = ()=>{
   setShowPageLoading(true);
 
-  fetch(`http://localhost:8000/api/chat`, {
+  fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -71,6 +70,8 @@ const goToPremiumSession = ()=>{
       throw new Error("Something went wrong");
     })
     .then((data)=>{
+      localStorage.setItem('idChatSessionAjiratomo',data.sessionId);
+      setShowPageLoading(false);
       setPaySession(true);           
     })
     .catch((error) => {
@@ -107,7 +108,7 @@ const backToPrevious = () => {
               <button onClick={() => {backToMode()}} className="btn btn-neutral m-5">
                 Retour
               </button>
-              <h1 className="text-5xl font-bold">Session premium à 2 euros</h1>
+              <h1 className="text-5xl font-bold">Session premium à 4 euros</h1>
               <Elements stripe={stripePromise}>
                 <StripeContainer setAlertBool={setAlertBool} alertBool={alertBool} pseudo={props.pseudo} jobApply={props.jobApply} email={props.email} setEmail={props.setEmail} />
               </Elements>
@@ -119,8 +120,8 @@ const backToPrevious = () => {
                 Vous y êtes presque! Prêt à vivre une expérience d'interview
                 inégalée avec Ajiratomo ? Nous vous proposons deux options :
                 notre offre gratuite pour une brève introduction, ou notre offre
-                Premium à seulement 2 euros. Avec cette dernière, bénéficiez de
-                jusqu'à 10 questions sur vos compétences techniques et humaines,
+                Premium à seulement 4 euros. Avec cette dernière, bénéficiez de
+                jusqu'à 6 questions sur vos compétences techniques et humaines,
                 ainsi que d'un bilan personnalisé en fin d'interview. C'est une
                 occasion unique pour vous démarquer et progresser dans votre
                 préparation. Alors, prêt à saisir cette opportunité
@@ -128,7 +129,7 @@ const backToPrevious = () => {
               </p>
               <div className="flex flex-col lg:flex-row justify-center">
                 <button onClick={()=>{ goToPremiumSession()}} className="btn btn-primary m-10">
-                  Premium - environ 10 questions
+                  Premium - environ 6 questions
                 </button>
                 <button
                   onClick={() => goToFreeSession()}
@@ -173,7 +174,7 @@ const backToPrevious = () => {
     </div>
   </div>
   <div className="chat-bubble flex flex-row">
-    <p>Je suis bientôt à vous</p>
+    <p>Je suis bientôt à vous, je peux prendre un peu de temps, nous sommes parfois vicitime de notre succès</p>
     <span className="loading loading-dots loading-lg"></span>
   </div>
 </div>

@@ -10,9 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function ChatRoom(props) {
   const [goToSocial, setGoToSocial] = useState(false);
-  useEffect(() => {
-    console.log(props.chatQuestions, "opkkopkok");
-  }, []);
+
   return (
     <div className="flex flex-col">
       {props.chatQuestions?.length > 0 ? (
@@ -45,9 +43,9 @@ export default function ChatRoom(props) {
           <div className="hero-content text-center">
             {!goToSocial ? (
               <div className="max-w-xxl">
-                <h1 className="text-5xl font-bold">
-                  {props.nbOfQuestionsMax<3 ?"Êtes-vous prêt à passer à la vitesse supérieure ?":"Et oui! C'est fini 😊 "}
-                </h1>
+                {props.nbOfQuestionsMax<3 &&<h1 className="text-5xl font-bold">
+                  "Êtes-vous prêt à passer à la vitesse supérieure ?"
+                </h1>}
                 <div className="chat chat-start ">
                   <div className="chat-image avatar">
                     <div className="w-10 rounded-full">🤖</div>
@@ -77,13 +75,8 @@ export default function ChatRoom(props) {
                     </div>
                   </div>:
                   <>
-                  <div className="chat-bubble">
-                    <p>
-                    🎉 Bravo pour avoir terminé votre aventure avec Ajiratomo ! Recommandez-nous et partagez votre succès sur les réseaux sociaux. Merci de nous avoir accompagnés, bonne chance pour vos futures opportunités professionnelles ! Restez à l'affût des mises à jour d'Ajiratomo. À bientôt !
-                    </p>
-                    </div>
-                    <div className="max-w-xxl">
-                <SocialNetwork setGoToSocial={setGoToSocial} />
+                    <div className="flex justify-center item-center">
+                <SocialNetwork isPremium={props.isPremium?props.isPremium:false} setGoToSocial={setGoToSocial} />
               </div>
                   </>
                   }
@@ -91,7 +84,7 @@ export default function ChatRoom(props) {
               </div>
             ) : (
               <div className="max-w-xxl">
-                <SocialNetwork setGoToSocial={setGoToSocial} />
+                <SocialNetwork isPremium={props.isPremium?props.isPremium:false} setGoToSocial={setGoToSocial} />
               </div>
             )}
           </div>

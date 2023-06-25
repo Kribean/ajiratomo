@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 
 export default function StepAdvice(props) {
   return (
@@ -22,12 +21,6 @@ export default function StepAdvice(props) {
             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48" fill="white"><path d="m561-242-43-42 168-168H160v-60h526L517-681l43-42 241 241-240 240Z"/></svg>
             </button>
           <div className="flex flex-col lg:flex-row w-full items-center justify-center">
-            <Image
-              src="/keyboard.png"
-              width={400}
-              height={400}
-              alt="astuce reconnaissance vocal"
-            />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="100"
