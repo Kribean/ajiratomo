@@ -49,7 +49,7 @@ export default function LandingPannel() {
               Je suis Ajiratomo 🤖, votre bot de préparation d'entretiens dans tous les domaines et corps de métier.
               Préparez-vous à briller et cliquez pour essayer dès maintenant !
             </p>
-            <Link href='./chat-access' className="btn btn-primary">Réaliser une simulation d'interview</Link>
+            <Link href='/chat-access' className="btn btn-primary">Réaliser une simulation d'interview</Link>
           </div>
         </div>
       </div>
