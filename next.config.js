@@ -2,9 +2,9 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-    output: 'export',
-    basePath:'/ajiratomo',
-    assetPrefix:'/ajiratomo'
+
+  basePath:'/ajiratomo',
+
 
   }
    
