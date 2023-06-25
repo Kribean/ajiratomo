@@ -8,7 +8,6 @@ export default function ChatInputArea(props) {
   const [showSendButton,setShowSendButton] = useState(true);
   
   const handleChangeResponse = (e)=>{
-    console.log(e.target.value,"ppooooo")
     setResponse(e.target.value)
   };
 
@@ -22,7 +21,7 @@ export default function ChatInputArea(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        assistant:props.chatQuestions[0].question,
+        assistant:props.chatQuestions[0]?.question,
         user:response,
       }),
     })

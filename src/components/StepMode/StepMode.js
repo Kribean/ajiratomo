@@ -34,7 +34,7 @@ export default function StepMode(props) {
         throw new Error("Something went wrong");
       })
       .then((data)=>{
-        console.log('kayayyyay',data.sessionId);
+        console.log("fukushima",data.sessionId)
         localStorage.setItem('idChatSessionAjiratomo',data.sessionId);
         props.router.push(`/chat/${data.sessionId}`);            
       })

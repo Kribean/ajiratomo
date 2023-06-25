@@ -7,18 +7,15 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function StripeContainer(props) {
-
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
 
-  const handleChangeEmail = (e)=>{
-    const sanitizedEmail = e.target.value.replace(/[^a-zA-Z0-9@.-]/g, '');
-    if(sanitizedEmail)
-    {props.setEmail(sanitizedEmail)}
+  const handleChangeEmail = (e) => {
+    const sanitizedEmail = e.target.value.replace(/[^a-zA-Z0-9@.-]/g, "");
+    props.setEmail(sanitizedEmail);
   };
 
   const handleSubmit = async (event) => {
@@ -35,18 +32,20 @@ export default function StripeContainer(props) {
     if (!error) {
       console.log("Token Généré", paymentMethod);
       const { id } = paymentMethod;
-      fetch(`http://localhost:8000/api/stripe`, {
-        method: "POST",
+
+      const idSession = localStorage.getItem("idChatSessionAjiratomo");
+
+      fetch(`http://localhost:8000/api/chat`, {
+        method: "PUT",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: 1000,
+          idSession: idSession,
+          email: props.email,
           id: id,
-          jobApply:props.jobApply,
-          pseudo:props.pseudo,
-          email:props.email
+          isPremium:true
         }),
       })
         .then((data) => {
@@ -56,7 +55,7 @@ export default function StripeContainer(props) {
           throw new Error("Something went wrong");
         })
         .then((data) => {
-          /*router.push(`/chat/${data.idPrem}`);*/
+          router.push(`/chat/${idSession}`);
         })
         .catch((error) => props.setAlertBool(true));
     }
@@ -67,22 +66,23 @@ export default function StripeContainer(props) {
       <div className="card-body ">
         <h2 className="card-title">Paiement</h2>
         <p className="m-4">
-          {" "}
           Offre permettant une session longue (maximum 10 questions avec
           Ajiratomo ou/et maximum 10 minutes de conversation)
         </p>
         <div className="flex flex-col justify-start">
-                <label className="label">
-                  <span className="label-text">Veuillez rentrer votre email pour réception de votre facture</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="Entrer votre email"
-                  className="input input-bordered lg:w-[500px] mb-[20px]"
-                  value={props.email}
-                  onChange={handleChangeEmail}
-                />
-              </div>
+          <label className="label">
+            <span className="label-text">
+              Veuillez rentrer votre email pour réception de votre facture
+            </span>
+          </label>
+          <input
+            type="email"
+            placeholder="Entrer votre email"
+            className="input input-bordered lg:w-[500px] mb-[20px]"
+            value={props.email}
+            onChange={handleChangeEmail}
+          />
+        </div>
         <form onSubmit={handleSubmit}>
           {props.alertBool && (
             <p className="text-error my-5">
@@ -92,7 +92,7 @@ export default function StripeContainer(props) {
             </p>
           )}
           <div className="flex flex-col justify-start">
-          <h2 className="text-xl font-medium">Renseignement bancaire</h2>
+            <h2 className="text-xl font-medium">Renseignement bancaire</h2>
           </div>
           <CardElement options={{ hidePostalCode: true }} />
 

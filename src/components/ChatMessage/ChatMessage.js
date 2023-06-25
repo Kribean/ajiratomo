@@ -1,11 +1,7 @@
 "use client";
 
 import "@/app/globals.css";
-import Image from "next/image";
-import rhpic from "@/../public/rhpic.png";
-import ChatTalkOption from "../ChatTalkOption/ChatTalkOption";
-import ChatInputArea from "../ChatInputArea/ChatInputArea";
-import ChatTiming from "../ChatTiming/ChatTiming";
+
 
 export default function ChatMessage(props) {
   return (
