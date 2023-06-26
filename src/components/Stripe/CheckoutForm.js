@@ -35,4 +35,4 @@ const CheckoutForm = () => {
   );
 };
 
-const stripePromise = loadStripe('pk_test_51MwWxsBghvSGXPtDqsZ45uV4QGK1mJmvuD13nRMRvvxs2gHoh18z17cPz8E1ahJSZOtSdx7mGC21d7MmzIO3Sf1300qPQHam8Y');
+const stripePromise = loadStripe('pk_live_51MwWxsBghvSGXPtDS4giqZJnOeL01dfXwdz1af9FBGk4Yw0ShoJIOIEPsd7jAo7DkysOG6rX19gAs6FharO2NkxX00b90gQ0ES');
