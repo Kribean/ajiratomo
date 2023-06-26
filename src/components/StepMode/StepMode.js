@@ -90,9 +90,7 @@ const backToPrevious = () => {
 };
 
 
-  const stripePromise = loadStripe(
-    "pk_test_51MwWxsBghvSGXPtDqsZ45uV4QGK1mJmvuD13nRMRvvxs2gHoh18z17cPz8E1ahJSZOtSdx7mGC21d7MmzIO3Sf1300qPQHam8Y"
-  );
+  const stripePromise = loadStripe(process.env.REACT_KEY);
 
 
   return (
