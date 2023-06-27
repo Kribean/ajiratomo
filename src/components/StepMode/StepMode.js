@@ -43,9 +43,6 @@ export default function StepMode(props) {
 
   };
 
-  const backToHome = ()=>{
-    props.router.push(`/`); 
-  }
 
 const goToPremiumSession = ()=>{
   setShowPageLoading(true);

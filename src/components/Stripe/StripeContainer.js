@@ -24,7 +24,7 @@ export default  function StripeContainer(props) {
   const goTopay = async ()=>{
   
     const idSession = localStorage.getItem("idChatSessionAjiratomo");
-    const response = await fetch(`http://localhost:8000/api/chat/create-checkout-session`, {
+    const response = await fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat/create-checkout-session`, {
   method: "POST",
   headers: {
     Accept: "application/json",
