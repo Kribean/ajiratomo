@@ -5,8 +5,11 @@ import Navbar from "@/components/Navbar";
 import StepAdvice from "@/components/StepAdvice/StepAdvice";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
-export default function ChatFree(props) {
+export default function ChatWithSlug(props) {
+  const params = useParams()
+
   const [understood, setUnderstood] = useState(false);
 
   const [chatQuestions, setChatQuestions] = useState([]);
@@ -15,8 +18,9 @@ export default function ChatFree(props) {
   const [isValid, setIsValid] = useState(true);
   const [isPremium, setIsPremium] = useState(false);
 
+  
   useEffect(() => {
-    const idSession = localStorage.getItem("idChatSessionAjiratomo");
+    const idSession = params.idSession;
     fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat/${idSession}/freemium`, {
       method: "GET",
       headers: {
@@ -79,7 +83,7 @@ export default function ChatFree(props) {
                 Cette session est fini, retournez sur la page d'accueil et
                 lancez un nouveau entretien.
               </p>
-              <Link href={"/"} className="btn btn-primary">
+              <Link href={"https://kribean.github.io/ajiratomo/"} className="btn btn-primary">
                 Accueil
               </Link>
             </div>
