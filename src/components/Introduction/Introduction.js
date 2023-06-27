@@ -1,6 +1,4 @@
 import '@/app/globals.css';
-import Image from 'next/image';
-import rhpic from '@/../public/rhpic.png';
 
 
 export default function Introduction() {
