@@ -9,16 +9,37 @@ import { useState } from "react";
 export default  function StripeContainer(props) {
   const stripe = useStripe();
 
-  const [emailValid,setEmailValid]=useState(false)
+  const [emailValid,setEmailValid]=useState(false);
+  const [secretNumber,setSecretNumber] = useState("");
+  const [changeNumber,setChangeNumber]=useState(false)
+  
 
   const handleChangeEmail = (e) => {
     const sanitizedEmail = e.target.value.replace(/[^a-zA-Z0-9@.-]/g, "");
     props.setEmail(sanitizedEmail);
-    if(sanitizedEmail?.length>5)
+    if(sanitizedEmail?.length>5 &&secretNumber<=9999 && secretNumber>=100)
     {
       setEmailValid(true);
+    }else{
+      setEmailValid(false);
     }
   };
+
+  const handleChangeSecretNumber = (e)=>{
+    const inputValue = e.target.value;
+      if (/^\d*$/.test(inputValue)) {
+        setSecretNumber(inputValue);
+
+        if(props.email?.length>5 &&inputValue<=9999 && inputValue>=100)
+        {
+          setEmailValid(true);
+        }else{
+          setEmailValid(false);
+        }
+      }
+    
+  };
+
 
   const goTopay = async ()=>{
   
@@ -32,10 +53,16 @@ export default  function StripeContainer(props) {
   body: JSON.stringify({
     idSession: idSession,
     isPremium: true,
-    customer_email: props.email,
+    customer_email: props.email.replace(/\s/g, "").toLowerCase(),
+    secretNumber:secretNumber
   }),
 });
 
+if (response.ok) {
+setChangeNumber(false)
+}else{
+  setChangeNumber(true)
+}
 const responseData = await response.json();
 
 const {sessionId} = responseData;
@@ -58,10 +85,12 @@ if(error){
         </p>
         <div className="flex flex-col justify-center item-center">
 
-            <label className="label">
+<div className="m-5">
+<label className="label">
             <span className="label-text">
               Veuillez rentrer votre email pour réception de votre facture
             </span>
+            
           </label>
           <input
             type="email"
@@ -70,6 +99,26 @@ if(error){
             value={props.email}
             onChange={handleChangeEmail}
           />
+</div>
+
+<div className="w-full m-5">
+<label className="label">
+            <span className="label-text">
+              Veuillez rentrer un nombre secret entre 100 et 9999
+            </span>
+
+          </label>
+          {changeNumber&&  <span className="label-text text-error">
+              Ce nombre est déjà pris, veuillez choisir un nouveau numéro
+            </span>}
+          <input
+             type="number" min="100" max="9999"
+            placeholder="Entrer votre numero secret à 3 chiffres"
+            className="input input-bordered md:w-[500px] mb-[20px]"
+            value={props.secretNumber}
+            onChange={handleChangeSecretNumber}
+          />
+</div>
                 
 {emailValid&&<button onClick={()=>{goTopay()}} className="btn btn-primary m-5">
               Payer - 4 euros

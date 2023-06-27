@@ -17,9 +17,10 @@ export default function ChatFree(props) {
 
   useEffect(() => {
     const paramsAll = window.location.href;
+    console.log("url0: ",paramsAll)
     const paramsTab = paramsAll.split('chat?');
-    const params = paramsTab[1];
-    const idSession = params.idSession;
+    const parametre = paramsTab[1];
+    const idSession = parametre.idSession;
     fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat/${idSession}/freemium`, {
       method: "GET",
       headers: {
