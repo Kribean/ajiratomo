@@ -5,10 +5,10 @@ import Navbar from "@/components/Navbar";
 import StepAdvice from "@/components/StepAdvice/StepAdvice";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+
 
 export default function ChatWithSlug(props) {
-  const params = useParams()
+
 
   const [understood, setUnderstood] = useState(false);
 
@@ -20,6 +20,9 @@ export default function ChatWithSlug(props) {
 
   
   useEffect(() => {
+    const paramsAll = window.location.href;
+    const paramsTab = paramsAll.split('chat/');
+    const params = paramsTab[1];
     const idSession = params.idSession;
     fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat/${idSession}/freemium`, {
       method: "GET",
