@@ -16,7 +16,10 @@ export default function ChatFree(props) {
   const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
-    const idSession = localStorage.getItem("idChatSessionAjiratomo");
+    const paramsAll = window.location.href;
+    const paramsTab = paramsAll.split('chat?');
+    const params = paramsTab[1];
+    const idSession = params.idSession;
     fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat/${idSession}/freemium`, {
       method: "GET",
       headers: {

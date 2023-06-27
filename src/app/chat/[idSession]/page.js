@@ -21,7 +21,7 @@ export default function ChatWithSlug(props) {
   
   useEffect(() => {
     const paramsAll = window.location.href;
-    const paramsTab = paramsAll.split('chat/');
+    const paramsTab = paramsAll.split('chat?');
     const params = paramsTab[1];
     const idSession = params.idSession;
     fetch(`https://app-ajiratomo-0e6517145dae.herokuapp.com/api/chat/${idSession}/freemium`, {

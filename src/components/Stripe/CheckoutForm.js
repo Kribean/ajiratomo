@@ -35,4 +35,4 @@ const CheckoutForm = () => {
   );
 };
 
-const stripePromise = loadStripe('pk_live_51MwWxsBghvSGXPtDS4giqZJnOeL01dfXwdz1af9FBGk4Yw0ShoJIOIEPsd7jAo7DkysOG6rX19gAs6FharO2NkxX00b90gQ0ES');
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY);
