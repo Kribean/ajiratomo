@@ -54,10 +54,8 @@ export default function ChatFree(props) {
       })
       .then((data) => {
         if (data.error) {
-          setMessageLogin(true)
           return setIsValid(false);
         }
-        setMessageLogin(false)
         setChatQuestions(data.chatQuestions);
         setChatInterview(data.chatInterview);
         setNbOfQuestionsMax(data.chatQuestions?.length);
@@ -65,7 +63,6 @@ export default function ChatFree(props) {
 
       })
       .catch((error) => {
-        setMessageLogin(true)
         console.log(error);
       });
   }
