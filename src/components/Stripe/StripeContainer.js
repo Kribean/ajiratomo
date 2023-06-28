@@ -11,8 +11,6 @@ export default  function StripeContainer(props) {
 
   const [emailValid,setEmailValid]=useState(false);
   const [secretNumber,setSecretNumber] = useState("");
-  const [changeNumber,setChangeNumber]=useState(false)
-  
 
   const handleChangeEmail = (e) => {
     const sanitizedEmail = e.target.value.replace(/[^a-zA-Z0-9@.-]/g, "");
@@ -58,11 +56,7 @@ export default  function StripeContainer(props) {
   }),
 });
 
-if (response.ok) {
-setChangeNumber(false)
-}else{
-  setChangeNumber(true)
-}
+
 const responseData = await response.json();
 
 const {sessionId} = responseData;
@@ -108,9 +102,6 @@ if(error){
             </span>
 
           </label>
-          {changeNumber&&  <span className="label-text text-error">
-              Ce nombre est déjà pris, veuillez choisir un nouveau numéro
-            </span>}
           <input
              type="number" min="100" max="9999"
             placeholder="Entrer votre numero secret à 3 chiffres"
