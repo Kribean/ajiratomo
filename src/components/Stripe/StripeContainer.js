@@ -115,7 +115,7 @@ if(error){
              type="number" min="100" max="9999"
             placeholder="Entrer votre numero secret à 3 chiffres"
             className="input input-bordered md:w-[500px] mb-[20px]"
-            value={props.secretNumber}
+            value={secretNumber}
             onChange={handleChangeSecretNumber}
           />
 </div>

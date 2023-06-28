@@ -1,11 +1,9 @@
 import "@/app/globals.css";
 import Link from 'next/link';
-import { useEffect } from "react";
+
 
 export default function LandingPannel() {
-  useEffect(()=>{
-    console.log(window.location.href,"popopopo ijij")
-      },[])
+
   return (
     <div className="hero min-h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
       <div className="hero-overlay bg-opacity-60"></div>
