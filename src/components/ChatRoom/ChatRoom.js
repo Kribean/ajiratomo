@@ -43,14 +43,14 @@ export default function ChatRoom(props) {
           <div className="hero-content text-center">
             {!goToSocial ? (
               <div className="max-w-xxl">
-                {props.nbOfQuestionsMax<3 &&<h1 className="text-5xl font-bold">
+                {props.nbOfQuestionsMax<4 &&<h1 className="text-5xl font-bold">
                   "Êtes-vous prêt à passer à la vitesse supérieure ?"
                 </h1>}
                 <div className="chat chat-start ">
                   <div className="chat-image avatar">
                     <div className="w-10 rounded-full">🤖</div>
                   </div>
-{                  props.nbOfQuestionsMax<3 ? <div className="chat-bubble">
+{                  props.nbOfQuestionsMax<4 ? <div className="chat-bubble">
                     <p>
                       "Vous avez déjà utilisé vos deux messages gratuits. Avec
                       notre offre premium, vous pourrez continuer à discuter

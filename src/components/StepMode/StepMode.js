@@ -112,7 +112,7 @@ const backToPrevious = () => {
                 Vous y êtes presque! Prêt à vivre une expérience d'interview
                 inégalée avec Ajiratomo ? Nous vous proposons deux options :
                 notre offre gratuite pour une brève introduction, ou notre offre
-                Premium à seulement 4 euros. Avec cette dernière, bénéficiez de
+                Premium à seulement 3,99 euros. Avec cette dernière, bénéficiez de
                 jusqu'à 6 questions sur vos compétences techniques et humaines,
                 ainsi que d'un bilan personnalisé en fin d'interview. C'est une
                 occasion unique pour vous démarquer et progresser dans votre
@@ -127,7 +127,7 @@ const backToPrevious = () => {
                   onClick={() => goToFreeSession()}
                   className="btn btn-outline btn-primary m-10"
                 >
-                  Gratuit - 1 question
+                  Gratuit - 2 questions
                 </button>
               </div>
               <div className="flex flex-row justify-end m-5">
@@ -166,7 +166,7 @@ const backToPrevious = () => {
     </div>
   </div>
   <div className="chat-bubble flex flex-row">
-    <p>Je suis bientôt à vous, je peux prendre un peu de temps, nous sommes parfois vicitime de notre succès</p>
+    <p>Je suis bientôt à vous, je peux prendre un peu de temps, nous sommes parfois victime de notre succès</p>
     <span className="loading loading-dots loading-lg"></span>
   </div>
 </div>

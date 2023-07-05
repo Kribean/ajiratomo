@@ -32,7 +32,7 @@ const backToMode = ()=>{
               <button onClick={() => {backToMode()}} className="btn btn-neutral m-5">
                 Retour
               </button>
-              <h1 className="text-5xl font-bold">Session premium à 4 euros</h1>
+              <h1 className="text-5xl font-bold">Session premium à 3,99 euros</h1>
               <Elements stripe={stripePromise}>
                 <StripeContainer email={email} setEmail={setEmail} />
               </Elements>

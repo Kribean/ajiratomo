@@ -112,7 +112,7 @@ if(error){
 </div>
                 
 {emailValid&&<button onClick={()=>{goTopay()}} className="btn btn-primary m-5">
-              Payer - 4 euros
+              Payer - 3,99 euros
             </button>}
         </div>
       </div>
